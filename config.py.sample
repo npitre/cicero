@@ -1,0 +1,21 @@
+# For now we gather config options here.
+# TODO: Make this a robustly parsed external config file, rather than having
+# users edit code.
+
+# Language phonetic rules and filters.
+rulefile = "/home/foo/cicero/rules.fr"
+# List of known good phonetic translations for regression check
+testfile = "/home/foo/cicero/checklist.fr"
+# MBROLA executable
+mbrola_prog_path = '/usr/local/bin/mbrola'
+# MBROLA voice file
+mbrola_voice = '/usr/local/lib/mbrola/fr1/fr1'
+# pitch factor
+mbrola_f = 0.95
+# default time factor (smaller talks faster)
+# note: BRLTTY for example might override this with its own value
+mbrola_t = 0.9
+# Output sound device
+snd_dev = '/dev/dsp'
+# Debugging output on stderr
+tracing = 0

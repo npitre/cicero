@@ -1,0 +1,637 @@
+# This file is part of Cicero TTS.
+#   Cicero TTS: A Small, Fast and Free Text-To-Speech Engine.
+#   Copyright (C) 2003-2008 Nicolas Pitre  <nico@cam.org>
+#   Copyright (C) 2003-2008 Stéphane Doyon <s.doyon@videotron.ca>
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License version 2.
+#   See the accompanying COPYING file for more details.
+#
+#   This program comes with ABSOLUTELY NO WARRANTY.
+
+a -> a
+déjà -> d e Z a
+pâte -> p a t
+reggae -> R E g e
+vitae -> v i t e
+Caen -> k a a~
+maestro -> m a e s t R o
+maître -> m E t R
+faim -> f e~
+pain -> p e~
+faisons -> f @ z o~
+faisan -> f @ z a~
+paille -> p a j
+bail -> b a j
+aile -> E l
+amnistie -> a m n i s t i
+programmation -> p R O g R a m a s j o~
+camp -> k a~
+tram -> t R a m
+manne -> m a n
+ancien -> a~ s j e~
+août -> u t
+Paul -> p O l
+autruche -> o t R y S
+pays -> p E i
+paysage -> p E i z a Z
+aymé -> E m e
+paye -> p E j
+bateau -> b a t o
+b -> b e
+byte -> b a i t
+bytes -> b a i t s
+abbé -> a b e
+plomb -> p l o~
+applomb -> a p l o~
+aube -> o b
+c -> s e
+c'est -> s E
+rançon -> R a~ s o~
+bacchanale -> b a k a n a l
+accéder -> a k s e d e
+occuper -> O k y p e
+archétype -> a R k e t i p
+architecte -> a R S i t E k t
+orchidée -> O R k i d e
+orchestre -> O R k E s t R
+chorale -> k O R a l
+match -> m a t S
+chrétien -> k R e t j e~
+chien -> S j e~
+nickel -> n i k E l
+grecque -> g R E k
+pecq -> p E k
+scène -> s E n
+cède -> s E d
+banc -> b a~
+recoin -> R @ k w e~
+donc -> d o~ k
+d -> d e
+addition -> a d i s j o~
+grand -> g R a~
+Rembrandt -> R a~ b R a~
+pied -> p j e
+lourd -> l u R
+placard -> p l a k a R
+don -> d o~
+bled -> b l E d
+e -> @
+bateau -> b a t o
+cheveaux -> S @ v o
+Jean -> Z a~
+Jeanne -> Z a n
+aspect -> a s p E
+suspects -> s y s p E
+pied -> p j e
+meeting -> m i t i N
+peindre -> p e~ d R
+vieille -> v j E j
+neige -> n E Z
+selle -> s E l l
+caramel -> k a R a m E l
+celsius -> s E l s j y s
+emmancher -> a~ m a~ S e
+salem -> s a l E m
+femme -> f a m
+décembre -> d e s a~ b R
+en -> a~
+enharmonique -> a~ n a R m O n i k
+enivrer -> a~ n i v R e
+patient -> p a s j a~
+patience -> p a s j a~ s
+ennui -> a~ n H i
+penne -> p E n
+mienne -> m j E n
+ennemi -> E n @ m i
+dents -> d a~
+couvents -> k u v a~
+présents -> p R e z a~
+cent -> s a~
+vent -> v a~
+lent -> l a~
+dent -> d a~
+accent -> a k s a~
+conscient -> k o~ s j a~
+coefficient -> k o E f i s j a~
+revient -> R @ v j e~
+talent -> t a l a~
+équivalent -> e k i v a l a~
+prudemment -> p R y d a m a~
+vitement -> v i t m a~
+moment -> m O m a~
+elles -> E l l
+couvent -> k u v a~
+le -> l @
+couvent -> k u v a~
+étaient -> e t E
+mangent -> m a~ Z
+viendra -> v j e~ d R a
+tien -> t j e~
+amen -> a m E n
+examen -> E g z a m e~
+rien -> R j e~
+entre -> a~ t R
+pentathlon -> p a~ t a t l o~
+sept -> s E t
+septième -> s E t j E m
+fer -> f E R
+cher -> S E R
+hier -> j E R
+hiver -> i v E R
+parler -> p a R l e
+léger -> l e Z e
+mesdames -> m e d a m
+lesquels -> l e k E l
+desquelles -> d e k E l l
+il -> i l
+est -> E
+ressembler -> R @ s a~ b l e
+restructurer -> R @ s t R y k t y R e
+resaisir -> R @ s E z i R
+resaluer -> R @ s a l y e
+les -> l e
+des -> d e
+tes -> t e
+mes -> m e
+ces -> s e
+ses -> s e
+fortes -> f O R t
+dames -> d a m
+fortes dames -> f O R t @ & d a m
+et -> e
+eu -> y
+peur -> p 9 R
+tracteurs -> t R a k t 9 R
+meuble -> m @ b l
+neuf -> n @ f
+fieul -> f j @ l
+jeune -> Z @ n
+meute -> m 2 t
+tueuse -> t y 2 z
+jeu -> Z 2
+gueuze -> g 2 z
+eût -> y
+jeûne -> Z 2 n
+exact -> E g z a k t
+dahomey -> d a O m e
+ceylan -> s e l a~
+asseye -> a s E j
+nez -> n e
+mangez -> m a~ Z e
+chez -> S e
+je -> Z @
+te -> t @
+que -> k @
+quatre -> k a t R
+pattes -> p a t
+montre -> m o~ t R
+mangeons -> m a~ Z o~
+actuellement -> a k t y E l l m a~
+guillemets -> g i j m E
+infect -> e~ f E k t
+tectonique -> t E k t O n i k
+avec -> a v E k
+menue -> m @ n y
+ambiguë -> a~ b i g y
+citroën -> s i t R O E n
+noël -> n O E l
+été -> e t e
+règle -> R E g l
+fête -> f E t
+f -> E f
+affaire -> a f E R
+feu -> f 2
+g -> Z e
+suggérer -> s y g Z e R e
+suggestif -> s y g Z E s t i f
+agglomérer -> a g l O m e R e
+craignions -> k R E n j o~
+châtaignier -> S a t E n j e
+agneau -> a n j o
+vingt -> v e~
+doigts -> d w a
+vingtaine -> v e~ t E n
+quatre-vingts ans -> k a t R @ & v e~ z & a~
+quatre-vingt-un -> k a t R @ & v e~ & 9~
+81 -> k a t R @ & v e~ & 9~
+80 ans -> k a t R @ & v e~ z & a~
+81 ans -> k a t R @ & v e~ & 9~ n & a~
+88 ans -> k a t R @ & v e~ & H i t _ a~
+90 ans -> k a t R @ & v e~ & d i z & a~
+91 ans -> k a t R @ & v e~ & o~ z _ a~
+98 ans -> k a t R @ & v e~ & d i z & H i t _ a~
+99 ans -> k a t R @ & v e~ & d i z & n @ v & a~
+100 ans -> s a~ t & a~
+200 ans -> d 2 _ s a~ z & a~
+201 ans -> d 2 _ s a~ _ 9~ n & a~
+doigté -> d w a t e
+aiguillage -> E g y i j a Z
+linguiste -> l e~ g y i s t
+langage -> l a~ g a Z
+sang -> s a~
+grog -> g R O g
+gag -> g a g
+goulag -> g u l a g
+congé -> k o~ Z e
+George -> Z O R Z
+h -> a S
+p -> p e
+d -> d e
+d'huitre -> d H i t R
+aujourd'hui -> o Z u R d H i
+d'hôte -> d o t
+humeur -> y m 9 R
+ahuri -> a y R i
+illégal -> i l l e g a l
+mille -> m i l
+village -> v i l a Z
+cueillir -> k 9 j i R
+caillou -> k a j u
+famille -> f a m i j
+bail -> b a j
+deuil -> d @ j
+immaculé -> i m m a k y l e
+Karim -> k a R i m
+timbre -> t e~ b R
+parking -> p a R k i N
+inhumain -> i n y m e~
+distinct -> d i s t e~
+innombrable -> i n o~ b R a b l
+vin -> v e~
+vingt -> v e~
+parties -> p a R t i
+fermier -> f E R m j e
+portier -> p O R t j e
+patio -> p a s j o
+renier -> R @ n j e
+cri -> k R i
+abîme -> a b i m
+vînimes -> v i n i m
+coïncider -> k O e~ s i d e
+aïeul -> a j @ l
+ambiguïté -> a~ b i g y i t e
+j -> Z i
+adjoint -> a d Z w e~
+joujoux -> Z u Z u
+k -> k a
+képi -> k e p i
+l -> E l
+aller -> a l e
+Renault -> R @ n o
+lit -> l i
+m -> E m
+pomme -> p O m
+monsieur -> m @ s j 2
+film -> f i l m
+n -> E n
+parking -> p a R k i N
+meeting -> m i t i N
+année -> a n e
+panne -> p a n
+une -> y n
+niño -> n i N i o
+escroc -> E s k R o
+cochon -> k o S o~
+moelleux -> m w a l 2
+oesophage -> 2 z O f a Z
+soeur -> s 9 R
+oeuf -> @ f
+coin -> k w e~
+poil -> p w a l
+poêle -> p w E l
+boîte -> b w a t
+comme -> k O m
+vélodrome -> v e l O d R o m
+bombe -> b o~ b
+www.web.com -> d u b l @ v e _ d u b l @ v e _ d u b l @ v e _ p w e~ _ w E b _ p w e~ _ k O m
+mon -> m o~
+bonne -> b O n
+amazone -> a m a z o n
+alcool -> a l k O l
+zoo -> z o
+pool -> p u l
+galops -> g a l o
+salop -> s a l o
+sirop -> s i R o
+trop -> t R o
+gros -> g R o
+dos -> d o
+Prévost -> p R e v o
+poser -> p o z e
+mot -> m o
+dépots -> d e p o
+boum -> b u m
+toundra -> t u n d R a
+loups -> l u
+beaucoup -> b o k u
+hibou -> i b u
+brouillard -> b R u i j a R
+où -> u
+coûter -> k u t e
+noyer -> n w a j e
+voyelles -> v w a j E l l
+roy -> R w a
+berlioz -> b E R l j o z
+zorro -> z O R o
+zoo -> z o
+allégro -> a l e g R o
+sobre -> s O b R
+notions -> n O s j o~
+émotions -> e m O s j o~
+rôt -> R o
+cône -> k o n
+angström -> a~ g s t R O m
+p -> p e
+corps -> k O R
+temps -> t a~
+champs -> S a~
+camp -> k a~
+contrechamp -> k o~ t R @ S a~
+draps -> d R a
+sparadrap -> s p a R a d R a
+baptiser -> b a t i z e
+compte -> k o~ t
+prompt -> p R o~
+exempt -> E g z a~
+phrase -> f R a z
+appliquer -> a p l i k e
+pas -> p a
+q -> k y
+qu'il -> k i l
+quatre -> k a t R
+cinq -> s e~ k
+cent -> s a~
+coq -> k O k
+r -> E R
+surréaliste -> s y R R e a l i s t
+courrai -> k u R R E
+erreur -> E R 9 R
+rien -> R j e~
+s -> E s
+s'amène -> s a m E n
+schizophrène -> s k i z O f R E n
+schéma -> S e m a
+déshabiller -> d e z a b i j e
+shérif -> S e R i f
+assez -> a s e
+baiser -> b E z e
+bus -> b y s
+nimbus -> n e~ b y s
+écus -> e k y
+focus -> f O k y s
+phallus -> f a l y s
+cumulus -> k y m y l y s
+minus -> m i n y s
+stratus -> s t R a t y s
+cactus -> k a k t y s
+motus -> m O t y s
+cas -> k a
+dos -> d o
+pas -> p a
+vus -> v y
+ils -> i l
+pis -> p i
+sens -> s a~ s
+mars -> m a R s
+à -> a
+tous -> t u s
+tous les -> t u _ l e
+pour -> p u R
+tous -> t u s
+à -> a
+tous -> t u s
+les -> l e
+jours -> Z u R
+pour -> p u R
+grands -> g R a~
+mesdames -> m e d a m
+objets -> O b Z E
+sbire -> z b i R
+verser -> v E R s e
+sien -> s j e~
+t -> t e
+t'amène -> t a m E n
+attitude -> a t i t y d
+asthme -> a s m
+huit -> H i t
+août -> u t
+tien -> t j e~
+tiers -> t j E R
+tertiaire -> t E R s j E R
+initiation -> i n i s j a s j o~
+partiel -> p a R s j E l
+martien -> m a R s j e~
+vénitienne -> v e n i s j E n
+patiemment -> p a s j a m a~
+minutie -> m i n y s i
+inertie -> i n E R s i
+fort -> f O R
+chats -> S a
+eût -> y
+peut -> p 2
+point -> p w e~
+test -> t E s t
+script -> s k R i p t
+bataille -> b a t a j
+orgueilleux -> O R g 9 j 2
+orgueil -> O R g 9 j
+album -> a l b O m
+humble -> 9~ b l
+un -> 9~
+emprunt -> a~ p R 9~
+fatigue -> f a t i g
+huitre -> H i t R
+nuit -> n H i
+huile -> H i l
+cruel -> k R y E l
+nuage -> n y a Z
+brut -> b R y t
+fûtes -> f y t
+v -> v e
+cave -> k a v
+w -> d u b l @ v e
+watt -> w a t
+x -> i k s
+exsuder -> E k s y d e
+exagérer -> E g z a Z e R e
+exemple -> E g z a~ p l
+exhumer -> E g z y m e
+voix -> v w a
+paix -> p E
+prix -> p R i
+soixante -> s w a s a~ t
+faux -> f o
+toux -> t u
+beaux -> b o
+foux -> f u
+jeux -> Z 2
+auxquels -> o k E l
+dixième -> d i z j E m
+six -> s i s
+dix -> d i s
+lexique -> l E k s i k
+lexicaux -> l E k s i k o
+vox -> v O k s
+gymnase -> Z i m n a z
+tympan -> t e~ p a~
+laryngite -> l a R e~ Z i t
+cryogénique -> k R i O Z e n i k
+myope -> m i O p
+z -> z E d
+razzia -> R a z j a
+tzigane -> t s i g a n
+zéro -> z e R o
+cent -> s a~
+onze -> o~ z
+long -> l o~
+devrait -> d @ v R E
+souvent -> s u v a~
+derniers -> d E R n j e
+expérience -> E k s p e R j a~ s
+redevenir -> R @ d @ v @ n i R
+dessus -> d @ s y
+sûrement -> s y R m a~
+rapidement -> R a p i d m a~
+retracer -> R @ t R a s e
+sous-ensemble -> s u z & a~ s a~ b l
+doc -> d O k
+peut être -> p 2 _ E t R
+peut-être -> p 2 _ t E t R
+nom -> n o~
+jeunes interprètes -> Z @ n z & e~ t E R p R E t
+vous éblouiront -> v u z & e b l u i R o~
+ok -> o k e
+travers -> t R a v E R
+mis en -> m i z & a~
+je lis beaucoup -> Z @ _ l i _ b o k u
+un avion orange -> 9~ n & a v j o~ _ O R a~ Z
+internet -> e~ t E R n E t
+net.com -> n E t _ p w e~ _ k O m
+document -> d O k y m a~
+argument -> a R g y m a~
+absolument -> a b s O l y m a~
+présument -> p R e z y m
+fument -> f y m
+trépieds -> t R e p j e
+Piedmont -> p j e m o~
+devrait -> d @ v R E
+rechercher -> R @ S E R S e
+psychologies -> p s i k O l O Z i
+stand -> s t a~ d
+end -> E n d
+goût -> g u
+des hommes -> d e z & O m
+transition -> t R a~ z i s j o~
+transaction -> t R a~ z a k s j o~
+transmission -> t R a~ s m i s j o~
+restriction -> R E s t R i k s j o~
+entend -> a~ t a~
+comprend -> k o~ p R a~
+quand -> k a~
+incompétent -> e~ k o~ p e t a~
+racontent -> R a k o~ t
+mécontent -> m e k o~ t a~
+vraisemblable -> v R E s a~ b l a b l
+subsister -> s y b z i s t e
+subside -> s y b s i d
+omni -> O m n i
+paiement -> p E m a~
+donc -> d o~ k
+juillet -> Z H i j E
+billet -> b i j E
+Desjardins -> d e Z a R d e~
+Deshormeaux -> d e z O R m o
+leclerc -> l @ k l E R
+Marc -> m a R k
+tabac -> t a b a
+caoutchouc -> k a u t S u
+techno -> t E k n o
+synchro -> s e~ k R o
+Schtroumpfs -> S t R u m p f
+mono -> m o n o
+client -> k l j a~
+reclus -> R @ k l y
+monocorde -> m o n o k O R d
+bienvenue -> b j e~ v @ n y
+récent -> R e s a~
+Vincent -> v e~ s a~
+sous-jacent -> s u _ Z a s a~
+présent -> p R e z a~
+non un -> n o~ _ 9~
+quelqu'un avait -> k E l k 9~ _ a v E
+cet -> s E t
+cet équipement -> s E t _ e k i p m a~
+dans un -> d a~ z & 9~
+bons outil -> b o~ z & u t i
+bons homes -> b o~ z & O m
+sauvegarde -> s o v g a R d
+exactement -> E g z a k t @ m a~
+brusquement -> b R y s k @ m a~
+évidemment -> e v i d a m a~
+bonheur -> b O n 9 R
+différent -> d i f e R a~
+élément -> e l e m a~
+a-t-il -> a _ t i l
+mange-t-on -> m a~ Z _ t o~
+mangent-il -> m a~ Z _ t i l
+vont-elles -> v o~ _ t E l l
+avait-on -> a v E _ t o~
+lecture -> l E k t y R
+second empire -> s @ g o~ t & a~ p i R
+bang -> b a~ g
+Santiago -> s a~ t j a g o
+option -> O p s j o~
+attention -> a t a~ s j o~
+fonction -> f o~ k s j o~
+détail -> d e t a j
+détails -> d e t a j
+deuxième -> d 2 z j E m
+passeport -> p a s p O R
+plus haut -> p l y - o
+les herbes -> l e z & E R b
+arbres en -> a R b R z & a~
+plus avant -> p l y z & a v a~
+9 enfants -> n @ f _ a~ f a~
+9 amis -> n @ f _ a m i
+9 ans -> n @ v & a~
+9 heures -> n @ v & @ R
+les uns les autres -> l e z & 9~ _ l e z & o t R
+pour tous -> p u R _ t u s
+tous vos -> t u _ v o
+tous leurs -> t u _ l 9 R
+chanson -> S a~ s o~
+profitez-en -> p R O f i t e z & a~
+grand ami -> g R a~ t & a m i
+grand homme -> g R a~ t & O m
+Jésus -> Z e z y
+tous ceux -> t u _ s 2
+fils -> f i s
+le président -> l @ _ p R e z i d a~
+état -> e t a
+entreprise -> a~ t R @ p R i z
+danser -> d a~ s e
+consciente -> k o~ s j a~ t
+blanc -> b l a~
+bientôt -> b j e~ t o
+Mesnil -> m e n i l
+torche -> t O R S
+matchtab -> m a t S t a b
+envers -> a~ v E R
+orchidée -> O R k i d e
+psychique -> p s i S i k
+débutions -> d e b y t j o~
+balbutiements -> b a l b y s i m a~
+remerciement -> R @ m E R s i m a~
+il s'agit -> i l _ s a Z i
+présentement -> p R e z a~ t m a~
+parfum -> p a R f 9~
+parfums -> p a R f 9~
+parfumé -> p a R f y m e
+clefs -> k l e
+oignons -> O n j o~
+St-Laurent -> s e~ _ l o R a~
+accident -> a k s i d a~
+incident -> e~ s i d a~
+occident -> O k s i d a~
+décident -> d e s i d

@@ -1,0 +1,19 @@
+-ALSA interface
+-Remove dependency on sox for saypho and bulktalk.
+-Filters: consider adding a dictionnary-based filter for full word matches.
+-Filter non-printables properly.
+    Préfiltrage: ttp.PhonetizeError: Char unmatched <«> 171
+-Roman numbers filter.
+-Volume and speed controls.
+-Trace calls: disabling tracing just throws away debugging strings instead of
+   printing them, but we still waste a lot of effort preparing those strings.
+-Chunking in phonetizer is somewhat crude...
+-MBROLA output estimation: improve heuristic, timeout to save us if
+   we guess wrong.
+-Use very long text as a reference to see impact of new rules.
+-Make a regression example text file for numbers.
+-Improve text preparation.
+-Less crude config file.
+-FIXME's...
+-User dictionnary.
+-Bridge with more standard speech APIs.

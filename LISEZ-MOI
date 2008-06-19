@@ -1,0 +1,136 @@
+Le Cicero TTS : un moteur de synthèse vocale petit, rapide et libre
+
+Copyright 2003-2008 Nicolas Pitre <nico@cam.org>
+Copyright 2003-2008 Stéphane Doyon <s.doyon@videotron.ca>
+
+Version 0.7.2, juin 2008
+
+Le présent logiciel est distribué en vertu de la GPL de GNU.
+Pour plus de détails, consulter le fichier COPYING dans la présente archive.
+
+Pour le moment, notre moteur TTS traite bien le français et en est qu'à 
+ses premiers balbutiements d'anglais, mais nous espérons qu'il pourra un 
+jour aussi " parler " bien l'anglais ou d'autres langues. Il se sert de 
+règles contextuelles afin de générer les phonèmes à partir du texte et 
+s'appuie sur MBROLA (http://tcts.fpms.ac.be/synthesis/mbrola.html) pour 
+produire la sortie audio à partir de ces phonèmes. Le Cicero TTS est 
+implémenté à l'aide du langage de programmation Python.
+
+Nous avons conçu le Cicero TTS dans le but de répondre à nos besoins en 
+tant qu'utilisateurs aveugles. Il peut être intégré à un logiciel de revue 
+d'écran : actuellement, il n'a été utilisé qu'avec BRLTTY seulement, mais 
+il devrait s'adapter facilement à d'autres logiciels. Nous avons 
+privilégié la rapidité et l'intelligibilité plutôt que la prosodie 
+optimale. Nous cherchions à obtenir un temps de réponse rapide, la 
+capacité de couper la parole et de passer à un différent énoncé 
+instantanément, une bonne intelligibilité malgré une prononciation 
+imparfaite, le suivi vocal dans le texte, la simplicité (hackability) et 
+un code source relativement petit.
+
+Le Cicero TTS n'effectue aucune forme d'analyse grammaticale et ne possède 
+pas encore de dictionnaire, de sorte que la prononciation n'est pas 
+toujours parfaite. Nous avons néanmoins réussi à appliquer des règles de 
+prononciation relativement sophistiquées et, à notre avis, les résultats 
+sont éloquents. Nous ne sommes vraiment pas des linguistes : nous sommes 
+toutefois des utilisateurs aveugles exigeants. Nous nous servons de ce 
+moteur sérieusement dans le cadre de nos activités professionnelles depuis 
+plus d'une année déjà.
+
+Il s'agit d'une version plutôt jeune du Cicero TTS, et la qualité ne 
+pourra que s'améliorer. L'installation et l'intégration se trouvent 
+certainement à un stade préliminaire et la prononciation est constamment 
+peaufinée. La liste de ce qui reste à accomplir est longue.
+
+Remerciements : Nous nous sommes grandement inspirés des implémentations 
+antérieures suivantes de l'algorithme de phonétisation :
+
+  Le perl_tts de David Haubensack :
+    ftp://tcts.fpms.ac.be/pub/mbrola/tts/French/perl_tts.zip
+
+  Le perl_ttp d'Alistair Conkie :
+    ftp://tcts.fpms.ac.be/pub/mbrola/tts/English/perl_ttp.zip
+
+Requis :
+
+- python 2.3 ou version ultérieure (principalement pour le module
+  ossaudiodev).
+
+- mbrola : testé avec mbrola 301h.
+
+- base de données vocales mbrola : testé avec fr1.
+
+- système Linux muni d'une carte de son fonctionnant avec OSS sound API
+  ou l'émulation OSS d'ALSA.
+
+Installation :
+
+À ce stade-ci, nous l'exécutons directement dans le répertoire contenant
+  le présent LISEZ-MOI.
+
+- copier config.py.sample sous le nom config.py
+
+- éditer config.py de manière à ce que les chemins pointent vers le
+  bon endroit
+
+- tester en exécutant tts_shell.py puis en tapant du texte
+
+Utilisation de BRLTTY avec suivi vocal complet dans le texte :
+
+Adresse du site BRLTTY : http://mielke.cc/brltty/
+Le pilote " External Speech " de BRLTTY est utilisé.
+
+- copier brl_es_wrapper.sample sous le nom brl_es_wrapper
+
+- éditer brl_es_wrapper de manière à ce que les chemins pointent vers le
+  bon endroit
+
+- dans /etc/brltty.conf, inscrire les lignes suivantes :
+
+speech-driver es
+speech-parameters program=/home/foo/cicero/brl_es_wrapper,uid=500,gid=500
+
+  en indiquant le chemin où vous avez extrait la présente archive de même
+  que les bons uid et gid de l'utilisateur
+
+- redémarrer BRLTTY
+
+- Si le Cicero TTS reste muet, vérifier le fichier journal (log) qui a été 
+  spécifié dans brl_es_wrapper
+
+Outils disponibles dans la présente archive :
+
+- tts_shell.py : Prononce de façon " interactive " le texte reçu sur stdin,
+  puis le reproduit sur stdout, mais seulement au fur et à mesure que le 
+  texte est prononcé. Entrez une ligne vide pour obtenir le silence.
+  Taper ctrl-D pour quitter.
+
+- bulktalk.py : Prend du texte à partir de stdin (possiblement d'un "pipe")
+  ou en paramètre puis le prononce directement par l'entremise de MBROLA, 
+  ou sauvegarde le fichier audio correspondant.
+
+- wphons.py : Traduit une phrase donnée en paramètre ou sur 
+  stdin en une série de phonèmes. Montre chaque règle lorsqu'elle est 
+  appliquée. Permet de relever les lacunes des règles de prononciation. 
+
+- saypho.py : Prend une séquence de phonèmes sur cmdline et génère les sons
+  correspondants afin de tester la prononciation. Lance mbrola et fait 
+  entendre le résultat avec sox.
+
+- regress.py : checklist.fr contient une liste d'expressions et leur
+  équivalent phonétiques vérifié. Traduit chaque expression en phonèmes au
+  moyen du fichier de règles courant et s'assure que le résultat est
+  identique à la prononciation de référence. Sert à faire des tests de 
+  régression lorsque les règles sont modifiées.
+
+- testfilters.py : Prend du texte en paramêtre ou sur stdin, le fait 
+  passer par les filtres seulement puis imprime le résultat.
+
+Vos commentaires sont appréciés :
+
+Si vous voyez des améliorations possibles, que vous avez relevé des bogues 
+ou que vous souhaitez simplement faire des commentaires (positifs ou 
+négatifs) à propos de notre programme, n'hésitez pas à nous écrire par 
+courriel aux adresses suivantes :
+
+	Nicolas Pitre <nico@cam.org>
+	Stéphane Doyon <s.doyon@videotron.ca>

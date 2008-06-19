@@ -1,0 +1,190 @@
+Phonetic rule definitions
+=========================
+
+A phonetic rule is of the form:
+
+	(left context) [[ target ]] (right context) -> (phoneme list)
+
+The engine is therefore substituting the target letter or string with the 
+specified phoneme symbol according to the first rule that matches.
+
+For example (taken from the French rules):
+
+	[[ eau ]] -> o
+
+In french, the sequence "eau" is always pronounced "o".
+
+	pati [[ en ]] -> a~
+	[[ en ]] n -> E
+
+Those are more examples with some contextual restrictions.  The "en" in 
+"patience" should be pronounced "a~" while the "en" in "penne" or "ennemi" 
+is pronounced "E".  That's where the context matching comes into play to 
+distinguish between those two "en" cases.
+
+The left and right context are actual regular expressions.  For example 
+you can have:
+
+	[[ eu ]] [bfilnprv] -> @
+
+which means that "eu" immediately followed by one of b, f, i, l, n, p, r 
+or v is pronounced "@".
+
+Or:
+
+	(ba|com) [[ p ]] t ->
+
+means that the "p" in words like "baptiser" or "compter" is silent 
+(empty phoneme list).
+
+The list of available phonemes depends on the voice database used with 
+mbrola.  Please see the documentation for the given database you wish to 
+use.
+
+If you're not familiar with regular expressions already, it is strongly 
+recommended that you learn about them first before reading any further.  
+Documentation on regular expressions is available from many sources.  
+Here's only a few of them, listed in increasing order of relevance:
+
+	1) man 7 regex
+
+	2) info regex
+
+	3) man perlretut
+
+	4) http://www.python.org/doc/2.3/lib/re-syntax.html
+
+	5) http://www.amk.ca/python/howto/regex/
+
+The Python Regular Expression HOWTO (number 5 above) is a must, and the 
+Python Regular Expression Syntax (number 4 above) is the definite 
+reference since the phonetic rule matching is all based upon Python's 
+regular expression support.
+
+
+Class substitutions
+===================
+
+Since everything is converted to lowercase before applying rules, we used 
+uppercase letters to define handy "classes" which are just in fact kind of 
+macros to substitute long and/or less obvious regular expressions.  For 
+example:
+
+	CLASS V [aeiouyàâéèêëîïôöùûü]
+
+so whenever V is used in a match description, it gets substituted by 
+[aeiouyàâéèêëîïôöùûü] which is a more convenient way to specify any french 
+vowel.
+
+	CLASS C [bcçdfghjklmnñpqrstvwxz]
+
+Is for consonants, and then:
+
+	CLASS L (?:V|C)
+
+for any letter.
+
+Then you can use those in context rules:
+
+	(V|CCan) [[ s ]] V -> z
+
+so to match "baiser" or "transition" for example.
+
+And finally, some classes to mark either punctuations (P), the beginning 
+of a word (S) or the end of a word (T):
+
+	CLASS P [\,\.\;\:\!\?]
+	CLASS S (?:^|_|P|\')
+	CLASS T (?:$|_|P)
+
+Note that the _ denotes a space.
+
+So we now can write:
+
+	sp [[ ect ]] s?T -> E
+
+to mean that any "ect" ending a word preceded by "sp", including the 
+possible plural form, should be pronounced "E".
+
+Note that those classes may not be used in the target match between [[ ]].
+You can have a look at the rules.en file for more examples of class usage.
+
+
+Prefilter definitions
+=====================
+
+Those are regular expressions, too, to process text before applying 
+phonetic rules.  This is used to convert everything to spelled out text, 
+like numbers, special symbols, abbreviations, etc.  The syntax is quite 
+straight forward:
+
+	<regular_expression> -> "replacement string"
+
+See the rules.fr file for example and/or inspiration.
+
+
+Regression testing
+==================
+
+Whenever an addition and/or modification to the rule file is performed, 
+please consider adding entries to the regression test file.  This ensures 
+that no regression is introduced by your changes and that the newly 
+handled cases won't be accidentally lost by future changes.  The format is 
+simple with one entry per line as follows:
+
+	<text> -> <phoneme list>
+
+where <text> is any text input that may include multiple words or numbers, 
+and <phoneme list> the resulting phoneme translation.  See the 
+checklist.fr file for example which is the current French regression check 
+list.
+
+To add entries to the regression file, the wphons.py tool can be used as 
+it prints on its standard output the translated phonemes for a given 
+string.  For example, a quick way to add to the French regression file 
+would be:
+
+	./wphons.py "Les poules couvent au couvent." >> checklist.fr
+
+And finally, to test it all simply run the regress.py tool which will 
+check all entries and report any mismatch. 
+
+
+Prosodic rule definitions
+=========================
+
+Our prosodic processing is extremely simple (no grammatical analysis of 
+the original text).  It relies on surrounding punctuations and the number 
+of syllables found in a word to apply a speed and pitch curve pattern to any 
+given word.  For example:
+
+	PROSO_SPEED . -30, 10
+
+That means the word that is followed by a period (usually the end of a 
+sentence) will have its phonemes' duration stretched gradually (or slowed 
+down) up to 30% of the default duration towards the end of the word.  The 
+next word after the period will have its first phonemes pronounced 10% 
+faster at the beginning of the word with a gradual return to the default 
+duration.
+
+	PROSO_PITCH . [1] {"100 70"}
+	PROSO_PITCH . [2] {"100 110", "100 70"}
+	PROSO_PITCH . [3] {"0 120", "100 100", "100 70"}
+	PROSO_PITCH . [4] {"0 110", "100 120", "100 100", "100 70"}
+
+Those are the pitch curve applied to the word preceding a period 
+according to the number ov vowels it contains.  Each tuple is a location 
+expressed in percent of the vowel duration and a pitch factor.  Those are 
+passed straight to mbrola (you can look at the mbrola documentation for 
+more explanations on those).
+
+For example, if you have "Hello." that's 2 vowels so the pitch would 
+reach 110 when 100% of the "e" is pronounced, then to drop down to a 
+pitch of 70 when 100% of the "o" is pronounced, as well as slowing down.
+
+Note again that _ is a special punctuation to mean a space.
+
+The PHO statement maps a specific phoneme to a class used to determine if 
+it constitutes a vowel or not for the prosodic processing, and a default 
+duration in milliseconds that can be stretched or shortened according to 
+prosodic rules.  All used phonemes must be listed.

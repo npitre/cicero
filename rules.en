@@ -1,0 +1,683 @@
+# This file is part of Cicero TTS.
+#   Cicero TTS: A Small, Fast and Free Text-To-Speech Engine.
+#   Copyright (C) 2003-2008 Nicolas Pitre  <nico@cam.org>
+#   Copyright (C) 2003-2008 Stéphane Doyon <s.doyon@videotron.ca>
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License version 2.
+#   See the accompanying COPYING file for more details.
+#
+#   This program comes with ABSOLUTELY NO WARRANTY.
+
+# Very early work-in-progress on English rules, tested with the us1 database. 
+
+# These phonemes are defined for the voice but are not produced by these
+# rules. They ought to be.
+# p_h   pod (aspirated allophone of p)
+# t_h   top (aspirated allophone of t)
+# 4     later (flapped allophone of t)
+# k_h   cot (aspirated allophone of k)
+
+# Durations are lifted from freephone, loose correspondance.
+
+PHO	p	C	97	# proxy drop
+PHO	t	C	64	# plot tromp
+PHO	k	C	88	# rock  crop
+PHO	b	C 	73	# cob box
+PHO	d	C	42	# nod dot
+PHO	g	C	62	# jog gospel
+PHO	f	C	91	# prof fox
+PHO	s	C	94	# boss sonic
+PHO	S	C	104	# wash shop
+PHO	tS	C	123	# notch chop
+PHO	T	C	86	# cloth thomp
+PHO	v	C	46	# salve volley
+PHO	z	C	64	# was zombie
+PHO	Z	C	68	# garage jacques
+PHO	dZ	C	91	# dodge jog
+PHO	D	C	25	# clothe thy
+PHO	m	C	58	# palm mambo
+PHO	n	C	53	# john novel
+PHO	N	C	58	# bong
+PHO	l	C	50	# doll lockwood
+PHO	r	C	47	# star roxanne
+PHO	j	C	39	# yacht
+PHO	w	C	50	# show womble
+PHO	h	C	56	# harm
+PHO	r=	V	154	# her urgent
+PHO	i	V	91	# even
+PHO	A	V	150	# arthur
+PHO	O	V	134	# all
+PHO	u	V	93	# oodles
+PHO	I	V	58	# illness
+PHO	E	V	89	# else
+PHO	{	V	45	# apple
+PHO	V	V	86	# nut
+PHO	U	V	60	# good
+#PHO	@	V	45	# about
+PHO	@	V	90	# about
+PHO	EI	V	126	# able
+PHO	AI	V	126	# island
+PHO	OI	V	177	# oyster
+PHO	@U	V	90	# over
+PHO	aU	V	164	# out
+
+# Punctuations, lifted from french rules.
+PHO     _       P       0
+PHO     .       P       190
+PHO     ,       P       150
+PHO     :       P       170
+PHO     !       P       200
+PHO     ?       P       200
+
+# Prosody stuff, lifted from french rules. Need complete overoll.
+PROSO_SPEED _ 0, 0
+PROSO_PITCH _ [1] {"0 100"}
+PROSO_PITCH _ [2] {"100 110", "100 100"}
+PROSO_PITCH _ [3] {"0 120", "100 110", "100 100"}
+PROSO_PITCH _ [4] {"0 120", "", "100 110", "100 100"}
+
+PROSO_SPEED & 0, 7
+PROSO_PITCH & [1] {"0 100"}
+PROSO_PITCH & [2] {"100 110", "100 100"}
+PROSO_PITCH & [3] {"0 120", "100 110", "100 100"}
+PROSO_PITCH & [4] {"0 120", "", "100 110", "100 100"}
+
+PROSO_SPEED - 0, 7
+PROSO_PITCH - [1] {"0 100"}
+PROSO_PITCH - [2] {"100 110", "100 100"}
+PROSO_PITCH - [3] {"0 120", "100 110", "100 100"}
+PROSO_PITCH - [4] {"0 120", "", "100 110", "100 100"}
+
+PROSO_SPEED , -20, 10
+PROSO_PITCH , [1] {"100 135"}
+PROSO_PITCH , [2] {"100 115", "100 135"}
+PROSO_PITCH , [3] {"0 110", "100 115", "100 135"}
+PROSO_PITCH , [4] {"0 120", "100 110", "100 130", "100 135"}
+
+PROSO_SPEED . -30, 10
+PROSO_PITCH . [1] {"100 70"}
+PROSO_PITCH . [2] {"100 110", "100 70"}
+PROSO_PITCH . [3] {"0 120", "100 100", "100 70"}
+PROSO_PITCH . [4] {"0 110", "100 120", "100 100", "100 70"}
+
+PROSO_SPEED ! -200, 10
+PROSO_PITCH ! [1] {"0 110 30 180 100 110"}
+PROSO_PITCH ! [2] {"100 130", "20 180 100 110"}
+PROSO_PITCH ! [3] {"100 120", "100 130", "20 180 100 110"}
+PROSO_PITCH ! [4] {"0 120", "100 110", "100 130", "30 180 100 110"}
+
+PROSO_SPEED ? -30, 10
+PROSO_PITCH ? [1] {"0 110 100 170"}
+PROSO_PITCH ? [2] {"100 120", "100 170"}
+PROSO_PITCH ? [3] {"0 110", "100 120", "100 170"}
+PROSO_PITCH ? [4] {"0 120", "100 110", "100 130", "100 170"}
+
+PROSO_SPEED : -20, 10
+PROSO_PITCH : [1] {"0 100 100 135"}
+PROSO_PITCH : [2] {"100 115", "100 135"}
+PROSO_PITCH : [3] {"0 110", "100 115", "100 135"}
+PROSO_PITCH : [4] {"0 120", "100 110", "100 130", "100 135"}
+
+
+# Now classes and rules, taken from perl_ttp.zip
+#     by Alistair Conkie (adc@cstr.ed.ac.uk) dated 13/12/95.
+# I have renamed phonemes to the codes used by mbrola voices.
+# Hope there aren't too many correspondance errors.
+
+
+#       C       consonant
+#       V       vowel
+#       E       ending (er,e,es,ed,ing,ely)
+#       Z       voiced consonant (b,d,v,j,l,m,n,r,w)
+#       F       front vowel (e,i,y)
+CLASS       C       [bcdfghjklmnpqrstvwxz]
+CLASS       V       [aeiouy]
+CLASS       E       (?:er|e|es|ed|ing|ely)
+CLASS       Z       [bdvjlmnrw]
+CLASS       F       [eiy]
+
+# From French rules:
+CLASS L (?:V|C)                                 # letters
+CLASS P [\,\.\;\:\!\?]                          # punctuations
+CLASS N [0-9]                                   # digits
+CLASS S (?:^|_|P|\')                            # beginning of word
+CLASS T (?:$|_|P|\')                               # end of word
+
+Z [[ 's ]]  -> z 
+V+C*Ze [[ 's ]]  -> z 
+V+ [[ 's ]]  -> z 
+ [[ ' ]]  -> 
+
+S [[ a ]] T -> EI 
+ [[ a ]] T -> @ 
+LC [[ able ]]  -> @ b @ l 
+ [[ able ]]  -> EI b @ l 
+S [[ acc ]] [ei] -> { k s
+ [[ again ]]  -> @ g E n 
+V+C [[ ag ]] e -> I dZ 
+ [[ air ]]  -> E r 
+ [[ ai ]]  -> EI 
+V+C* [[ ally ]]  -> @ l i 
+S [[ al ]] V+ -> @ l 
+V+C* [[ al ]] T -> @ l 
+V+C* [[ als ]] T -> @ l z 
+ [[ alk ]]  -> O k 
+ [[ al ]] C -> O l 
+ [[ ang ]] F -> EI n dZ 
+SC* [[ any ]]  -> E n i 
+S [[ are ]] T -> A r 
+S [[ ar ]] o -> @ r 
+ [[ ar ]] V+ -> E r 
+S [[ arr ]]  -> @ r 
+ [[ arr ]]  -> { r 
+SC* [[ ar ]] T -> A r 
+ [[ ar ]] T -> r= 
+ [[ ar ]]  -> A r 
+C [[ as ]] V+ -> EI s 
+ [[ au ]]  -> O 
+ [[ a ]] wa -> @ 
+ [[ aw ]]  -> O 
+ [[ ay ]]  -> EI 
+ [[ a ]] CFV+ -> EI 
+ [[ a ]] CFC*V+ -> { 
+SC* [[ a ]] CFT -> EI 
+ [[ a ]] CE -> EI 
+S [[ a ]] -> @
+ [[ a ]]  -> { 
+
+S [[ b ]] T -> b I 
+S [[ be ]] CV+ -> b I 
+ [[ being ]]  -> b i I N 
+S [[ both ]] T -> b @U T 
+ [[ buil ]]  -> b I l 
+S [[ bus ]] V+ -> b I z 
+ [[ b ]]  -> b 
+
+S [[ c ]] T -> s I 
+ [[ cc ]]  -> k 
+S [[ ch ]] C -> k 
+Ce [[ ch ]]  -> k 
+ [[ ch ]]  -> tS 
+Ss [[ ci ]] V+ -> s AI 
+ [[ ci ]] a -> S 
+ [[ ci ]] en -> S 
+ [[ ci ]] o -> S 
+ [[ c ]] F -> s 
+ [[ ck ]]  -> k 
+ [[ c ]] q -> 
+ [[ c ]]  -> k 
+
+S [[ d ]] T -> d I 
+V+C* [[ ded ]] T -> d I d 
+Ze [[ d ]] T -> d 
+V+C*Ce [[ d ]] T -> t 
+S [[ de ]] CV+ -> d I 
+S [[ do ]] T -> d u 
+S [[ does ]]  -> d V z 
+S [[ doing ]]  -> d u I N 
+S [[ dow ]]  -> d aU 
+ [[ du ]] a -> dZ u 
+ [[ d ]]  -> d 
+
+V+C* [[ e ]] T -> 
+'C*C [[ e ]] T -> 
+SC* [[ e ]] T -> i 
+V+ [[ ed ]] T -> d 
+V+C* [[ e ]] dT -> 
+C [[ e ]] ment -> 
+ [[ ev ]] er -> E v 
+ [[ e ]] CE -> i 
+ [[ eri ]] V+ -> i r i 
+ [[ eri ]]  -> E r I 
+V+C* [[ er ]] V+ -> r= 
+ [[ er ]] V+ -> E r 
+ [[ er ]]  -> r= 
+S [[ even ]]  -> i v E n 
+V+C* [[ e ]] w -> 
+t [[ ew ]]  -> u 
+s [[ ew ]]  -> u 
+r [[ ew ]]  -> u 
+d [[ ew ]]  -> u 
+l [[ ew ]]  -> u 
+z [[ ew ]]  -> u 
+n [[ ew ]]  -> u 
+j [[ ew ]]  -> u 
+th [[ ew ]]  -> u 
+ch [[ ew ]]  -> u 
+sh [[ ew ]]  -> u 
+ [[ ew ]]  -> j u 
+ [[ e ]] o -> i
+V+C*s [[ es ]] T -> I z 
+V+C*c [[ es ]] T -> I z 
+V+C*g [[ es ]] T -> I z 
+V+C*z [[ es ]] T -> I z 
+V+C*x [[ es ]] T -> I z 
+V+C*j [[ es ]] T -> I z 
+V+C*ch [[ es ]] T -> I z 
+V+C*sh [[ es ]] T -> I z 
+V+C* [[ e ]] sT -> 
+V+C* [[ ely ]] T -> l i 
+V+C* [[ ement ]]  -> m E n t 
+ [[ eful ]]  -> f U l 
+ [[ ee ]]  -> i 
+ [[ earn ]]  -> r= n 
+S [[ ear ]] C -> r= 
+ [[ ead ]]  -> E d 
+V+C* [[ ea ]] T -> i @ 
+ [[ ea ]] su -> E 
+ [[ ea ]]  -> i 
+ [[ eigh ]]  -> EI 
+ [[ ei ]]  -> i 
+S [[ eye ]]  -> AI 
+ [[ ey ]]  -> i 
+ [[ eu ]]  -> j U 
+ [[ e ]]  -> E 
+
+S [[ f ]] T -> E f 
+ [[ ful ]]  -> f U l 
+ [[ f ]]  -> f 
+
+S [[ g ]] T -> dZ i 
+ [[ giv ]]  -> g I v 
+S [[ g ]] iC -> g 
+ [[ ge ]] t -> g E 
+su [[ gges ]]  -> g dZ E s 
+ [[ gg ]]  -> g 
+SbV+ [[ g ]]  -> g 
+ [[ g ]] F -> dZ 
+ [[ great ]]  -> g r EI t 
+V+ [[ gh ]]  -> 
+ [[ g ]]  -> g 
+
+S [[ h ]] T -> EI tS 
+S [[ hav ]]  -> h { v 
+S [[ here ]]  -> h i r 
+S [[ hour ]]  -> aU r= 
+ [[ how ]]  -> h aU 
+ [[ h ]] V+ -> h 
+ [[ h ]]  -> 
+
+S [[ in ]]  -> I n 
+S [[ i ]] T -> AI 
+ [[ in ]] d -> AI n 
+ [[ ier ]]  -> i r= 
+V+C*r [[ ied ]]  -> i d 
+ [[ ied ]] T -> AI d 
+ [[ ien ]]  -> i E n 
+ [[ ie ]] t -> AI E 
+SC* [[ i ]] E -> AI 
+ [[ i ]] E -> i 
+ [[ ie ]]  -> i 
+ [[ i ]] CFC*V+ -> I 
+ [[ ir ]] V+ -> AI r 
+ [[ iz ]] E -> AI z 
+ [[ is ]] E -> AI z 
+ [[ i ]] dE -> AI 
+FC [[ i ]] CF -> I 
+ [[ i ]] tE -> AI 
+V+C*C [[ i ]] CF -> I 
+ [[ i ]] CF -> AI 
+ [[ ir ]]  -> r= 
+ [[ igh ]]  -> AI 
+ [[ ild ]]  -> AI l d 
+ [[ ign ]] T -> AI n 
+ [[ ign ]] C -> AI n 
+ [[ ign ]] E -> AI n 
+ [[ ique ]]  -> i k 
+ [[ i ]]  -> I 
+
+S [[ j ]] T -> dZ EI 
+ [[ j ]]  -> dZ 
+
+S [[ k ]] T -> k EI 
+S [[ k ]] n -> 
+ [[ k ]]  -> k 
+
+S [[ l ]] T -> E l 
+ [[ lo ]] cV+ -> l V 
+l [[ l ]]  -> 
+V+C*C [[ l ]] E -> @ l 
+ [[ lead ]]  -> l i d 
+ [[ l ]]  -> l 
+
+S [[ m ]] T -> E m
+ [[ mov ]]  -> m u v 
+ [[ m ]]  -> m 
+
+S [[ n ]] T -> E n
+e [[ ng ]] F -> n dZ 
+ [[ ng ]] r -> N g 
+ [[ ng ]] V+ -> N g 
+ [[ ngl ]] E -> N g @ l 
+ [[ ng ]]  -> N 
+ [[ nk ]]  -> N k 
+S [[ now ]] T -> n aU 
+ [[ n ]]  -> n 
+
+ [[ o ]] T -> @U 
+ [[ oa ]]  -> @U 
+ [[ o ]] e -> @U 
+ [[ of ]] T -> @ v 
+ [[ of ]] C -> O f 
+ [[ oing ]]  -> @U I N 
+ [[ oi ]]  -> OI 
+ [[ ol ]] d -> @U l 
+V+C*C [[ om ]]  -> V m 
+c [[ om ]] E -> V m 
+ [[ on't ]]  -> @U n t 
+S [[ only ]]  -> @U n l i 
+S [[ once ]]  -> w V n s 
+S [[ one ]]  -> w V n 
+S[dg] [[ one ]] T -> O n
+c [[ o ]] n -> A 
+ [[ o ]] ng -> O 
+SC?C [[ o ]] n -> @U  
+i [[ on ]]  -> @ n 
+V+C* [[ on ]] T -> @ n 
+V+C [[ on ]]  -> @ n 
+ [[ ood ]]  -> U d 
+ [[ ook ]]  -> U k 
+ [[ oor ]]  -> O r 
+ [[ oo ]]  -> u 
+ [[ orough ]]  -> r= @U 
+V+C* [[ or ]] T -> r= 
+V+C* [[ ors ]] T -> r= z 
+ [[ or ]]  -> O r 
+ [[ oss ]] T -> O s 
+ [[ o ]] stT -> @U 
+ [[ other ]]  -> V D r= 
+ [[ ought ]]  -> O t 
+ [[ ough ]]  -> V f 
+S [[ ou ]]  -> aU 
+h [[ ou ]] sV+ -> aU 
+ [[ ous ]]  -> @ s 
+ [[ our ]]  -> O r 
+ [[ ould ]]  -> U d 
+C [[ ou ]] Cl -> V 
+ [[ oup ]]  -> u p 
+ [[ ou ]]  -> aU 
+S [[ over ]]  -> @U v r= 
+ [[ ov ]]  -> V v 
+ [[ ow ]]  -> @U 
+ [[ oy ]]  -> OI 
+ [[ o ]] CE -> @U 
+ [[ o ]] Cen -> @U 
+ [[ o ]] CiV+ -> @U 
+ [[ o ]]  -> A
+
+S [[ p ]] T -> p i 
+ [[ peop ]]  -> p i p 
+ [[ ph ]]  -> f 
+ [[ pow ]]  -> p aU 
+ [[ put ]] T -> p U t 
+ [[ pp ]]  -> p 
+ [[ p ]]  -> p 
+
+S [[ q ]] T -> k j u
+ [[ quar ]]  -> k w O r 
+ [[ qu ]]  -> k w 
+ [[ q ]]  -> k 
+
+S [[ r ]] T -> A r
+S [[ re ]] CV+ -> r i 
+ [[ rr ]]  -> r 
+ [[ r ]]  -> r 
+
+S [[ s ]] T -> E s
+ [[ sh ]]  -> S 
+V+ [[ sion ]]  -> Z @ n 
+ [[ some ]]  -> s V m 
+V+ [[ sur ]] V+ -> Z r= 
+ [[ sur ]] V+ -> S r= 
+V+ [[ su ]] V+ -> Z u 
+V+ [[ ssu ]] V+ -> S u 
+V+ [[ sed ]] T -> z d 
+V+ [[ s ]] V+ -> z 
+ [[ said ]]  -> s E d 
+C [[ sion ]]  -> S @ n 
+ [[ s ]] s -> 
+Z [[ s ]] T -> z 
+V+C*Ze [[ s ]] T -> z 
+V+C*CV+V+ [[ s ]] T -> z 
+V+C*CV+ [[ s ]] T -> s 
+u [[ s ]] T -> s 
+SC*V+ [[ s ]] T -> z 
+S [[ sch ]]  -> s k 
+ [[ s ]] cF -> 
+V+ [[ sm ]]  -> z m 
+V+ [[ sn ]] ' -> z @ n 
+ [[ s ]]  -> s 
+
+S [[ t ]] T -> t i
+ [[ tch ]] -> tS
+V+C* [[ ted ]] T -> t I d 
+S [[ than ]] T -> D { n 
+ [[ that ]] T -> D { t 
+S [[ the ]] T -> D @ 
+ [[ their ]]  -> D E r 
+S [[ them ]] T -> D E m 
+S [[ then ]]  -> D E n 
+S [[ there ]]  -> D E r 
+ [[ ther ]]  -> D r= 
+ [[ these ]] T -> D i z 
+S [[ they ]]  -> D EI 
+S [[ this ]] T -> D I s 
+ [[ those ]]  -> D @U z 
+ [[ though ]] T -> D @U 
+ [[ through ]]  -> T r u 
+S [[ thus ]]  -> D V s 
+ [[ th ]]  -> T 
+s [[ ti ]] V+n -> tS 
+ [[ ti ]] a -> S 
+ [[ tien ]]  -> S @ n 
+ [[ ti ]] o -> S 
+ [[ to ]] T -> t u 
+ [[ tu ]] a -> tS u 
+ [[ tur ]] V+ -> tS r= 
+S [[ two ]]  -> t u 
+ [[ tt ]]  -> t 
+ [[ t ]]  -> t 
+
+S [[ un ]] i -> j u n 
+S [[ un ]]  -> V n 
+S [[ upon ]]  -> @ p O n 
+t [[ ur ]] V+ -> U r 
+s [[ ur ]] V+ -> U r 
+r [[ ur ]] V+ -> U r 
+d [[ ur ]] V+ -> U r 
+l [[ ur ]] V+ -> U r 
+z [[ ur ]] V+ -> U r 
+n [[ ur ]] V+ -> U r 
+j [[ ur ]] V+ -> U r 
+th [[ ur ]] V+ -> U r 
+ch [[ ur ]] V+ -> U r 
+sh [[ ur ]] V+ -> U r 
+ [[ ur ]] V+ -> j U r 
+ [[ ur ]]  -> r= 
+ [[ u ]] CT -> V 
+ [[ u ]] CC -> V 
+ [[ uy ]]  -> AI 
+Sg [[ u ]] V+ -> 
+g [[ u ]] E -> 
+g [[ u ]] V+ -> w 
+V+n [[ u ]]  -> j u 
+t [[ u ]]  -> u 
+s [[ u ]]  -> u 
+r [[ u ]]  -> u 
+d [[ u ]]  -> u 
+l [[ u ]]  -> u 
+z [[ u ]]  -> u 
+n [[ u ]]  -> u 
+j [[ u ]]  -> u 
+th [[ u ]]  -> u 
+ch [[ u ]]  -> u 
+sh [[ u ]]  -> u 
+ [[ u ]]  -> j u 
+
+S [[ v ]] T -> v i
+ [[ view ]]  -> v j u 
+ [[ v ]]  -> v 
+
+S [[ w ]] T -> d V b @ l j u
+ [[ ward ]]  -> w r= d
+ [[ ware ]]  -> w E r
+ [[ wa ]] s -> w A 
+ [[ wa ]] t -> w A 
+S [[ were ]]  -> w r= 
+ [[ what ]]  -> w A t 
+ [[ where ]]  -> w E r 
+ [[ whol ]]  -> h @U l 
+ [[ who ]]  -> h u 
+ [[ wh ]]  -> w 
+ [[ wor ]] C -> w r= 
+ [[ wr ]]  -> r 
+ [[ w ]]  -> w 
+
+S [[ x ]] T -> E k s
+ [[ x ]]  -> k s 
+
+S [[ y ]] T -> w V I
+S [[ yes ]]  -> j E s 
+ [[ young ]]  -> j V N 
+S [[ you ]]  -> j u 
+S [[ y ]]  -> j 
+(SC|b) [[ y ]] T -> AI 
+V+C*C [[ y ]] T -> i 
+V+C*C [[ y ]] i -> i 
+SC* [[ y ]] V+ -> AI 
+SC* [[ y ]] CFC*V+ -> I 
+SC* [[ y ]] CV+ -> AI 
+ [[ y ]]  -> I 
+
+S [[ z ]] T -> z i
+ [[ z ]]  -> z 
+
+[[ _ ]] -> _					# espace
+
+[[ . ]] -> .
+[[ , ]] -> ,
+[[ ; ]] -> ;
+[[ : ]] -> :
+[[ ! ]] -> !
+[[ ? ]] -> ?
+
+# Prephonetization filters
+
+# Caution: The produced output of a filter is itself processed only by the
+#    subsequent filters.
+# Caution: When an S or _ (space) is matched, it is consumed. Produce a
+#    space to replace it to keep the words separate.
+
+# minus sign
+S-(N)		-> " minus \1"
+# dash between digits
+(N)-(N)		-> "\1 dash \2"
+# decimal point
+(N)\.(N)	-> "\1 point \2"
+(N),(N)		-> "\1 \2"
+# adds space between digits and letters
+(N)([^0-9])	-> "\1 \2"
+([^0-9])(N)	-> "\1 \2"
+# recombines numbers containing spaces (or commas)
+(?<![0-9])(N{2,3})_+(?=NNNT) -> "\1"
+
+# Numbers
+(N)(?=N{12,})	-> "\1 "
+S0		-> " zero "
+([1-9]N*)(?=N{9})	-> "\1 billion "
+([1-9]N*)(?=N{6})	-> "\1 million "
+([1-9]N*)(?=N{3})	-> "\1 thousand "
+([1-9])(?=N{2})	-> "\1 hundred "
+9(?=N)		-> "ninty 1"
+8(?=N)		-> "eighty "
+7(?=N)		-> "seventy 1"
+6(?=N)		-> "sixty "
+5(?=N)		-> "fifty "
+4(?=N)		-> "fourty "
+3(?=N)		-> "thirty "
+2(?=N)		-> "twenty "
+19		-> "nineteen "
+18		-> "eighteen "
+17		-> "seventeen "
+16		-> "sixteen "
+15		-> "fifteen "
+14		-> "fourteen "
+13		-> "thirteen "
+12		-> "twelve "
+11		-> "eleven "
+10		-> "ten "
+9		-> "nine "
+8		-> "eight "
+7		-> "seven "
+6		-> "six "
+5		-> "five "
+4		-> "four "
+3		-> "three "
+2		-> "two "
+1		-> "one "
+0		-> ""
+
+# punctuations pronounced when nof followed by space:
+\.(?!($|\s))	-> " dot "
+\,(?!($|\s))	-> " comma "
+\?(?!($|\s))	-> " question "
+\!(?!($|\s))	-> " exclamation "
+\:(?!($|\s))	-> " colon "
+\;(?!($|\s))	-> " semicolon "
+
+# prononce "tiret" quand il n'est pas entouré de lettres
+#\-(?!L)		-> " dash "
+#(?!L)\-		-> " dash "
+
+# names of symbols
+"		-> " quote "
+\#		-> " number sign "
+\$		-> " dollar "
+\%		-> " percent "
+\&		-> " ampersand "
+\(		-> " left parenthesis "
+\)		-> " right parenthesis "
+\*		-> " asterisk "
+\+		-> " plus "
+\/		-> " slash "
+<		-> " less than "
+=		-> " equals "
+>		-> " greater than "
+\@		-> " at "
+\[		-> " left bracket "
+\\		-> " backslash "
+\]		-> " right bracket "
+\^		-> " carret "
+\_		-> " underscore "
+`		-> " backquote "
+\{		-> " left brace "
+\|		-> " bar "
+\}		-> " right brace "
+~		-> " tilda "
+¢		-> " cennts "
+¥		-> " yen "
+£		-> " pounds "
+°		-> " degrees "
+±		-> " plus or minus "
+×		-> " multied by "
+÷		-> " divided by "
+¼		-> " one fourth "
+½		-> " one half "
+¾		-> " three fourths "
+©		-> " copyright "
+®		-> " registred "
+
+# If these get re-ordered, no production must include - after this one.
+-		-> " "
+
+# Unpronounceable sequences of consonants should be spelled out.
+S(C)(C)T	-> " \1 \2 "
+S(C)(C)(C)T	-> " \1 \2 \3 "
+S(C)(C)(C)(C)T	-> " \1 \2 \3 \4 "
+(C)(\1)(\1)	-> " \1 \1 \1 "
+
+# Remove spaces aroudn punctuations
+_*([\.\!\?\:\;\,\'])_* -> "\1"
+# Collapse blanks
+_+		-> " "

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Having a wrapper makes it easy to redirect debugging/tracing output.
+exec /usr/bin/python \
+   /home/foo/cicero/tts_brltty_es.py \
+   2>> /home/foo/cicero/log

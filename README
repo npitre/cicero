@@ -1,0 +1,126 @@
+Cicero TTS: A Small, Fast and Free Text-To-Speech Engine.
+
+Copyright 2003-2008 Nicolas Pitre <nico@cam.org>
+Copyright 2003-2008 Stéphane Doyon <s.doyon@videotron.ca>
+
+Version 0.7.2, June 2008
+
+This software is distributed under the GNU General Public Licence (GPL). 
+See the COPYING file in this package for more details.
+
+Our TTS engine currently speaks French and some resemblance of English, 
+although we hope it can some day be taught to speak good English or other 
+languages. The engine uses context-sensitive rules to produce phonemes 
+from the text. It relies on MBROLA 
+(http://tcts.fpms.ac.be/synthesis/mbrola.html) to generate actual audio 
+output from the phonemes. The TTS engine is implemented using the Python 
+programming language.
+
+We've come up with this TTS to try and meet our own needs as blind users. 
+It's designed to be plugged as output to some screen-review software: 
+currently only used with BRLTTY, but should adapt easily to other 
+software. We favor speed and intelligibility over perfect pronunciation. 
+We've tried to give it a quick response time, the ability to quickly 
+shut-up and skip to another utterance, intelligibility where it counts 
+(not perfect pronunciation), the ability to track speech progression, 
+relative simplicity (hackability) and relative small code size.
+
+This TTS doesn't do any sort of grammatical analysis and it doesn't yet 
+have a dictionary, so pronunciation isn't always perfect. But we've 
+stretched the rule system pretty far and we think it's getting good. We're 
+definitely not linguists, but we are demanding blind users. We've been 
+using it seriously to do actual work for more than a year now.
+
+This is still an early release of our TTS, quality is beta-ish. 
+Installation/integration surely has rough edges still, and pronunciation 
+is constantly improving. The TODO-list is still generous.
+
+Credits: We were very much inspired by previous implementations of this
+general phonetization algorithm:
+
+  David Haubensack's perl_tts:
+    ftp://tcts.fpms.ac.be/pub/mbrola/tts/French/perl_tts.zip
+
+  Alistair Conkie's perl_ttp:
+    ftp://tcts.fpms.ac.be/pub/mbrola/tts/English/perl_ttp.zip
+
+Extra Requirements:
+
+- Requires python 2.3 or later (mainly for the ossaudiodev module),
+
+- Requires mbrola: tested with mbrola 301h.
+
+- Requires an mbrola voice database: tested with fr1.
+
+- Requires a Linux system with a working sound card using either the OSS
+  sound API or ALSA's OSS emulation.
+
+Installation:
+
+At this stage we just execute it directly in the directory containing
+this README.
+
+- Copy config.py.sample to config.py.
+
+- Edit config.py to make the paths point to the right place.
+
+- Test by running tts_shell.py then typing in some text.
+
+BRLTTY usage with full text tracking:
+
+BRLTTY home site is here: http://mielke.cc/brltty/
+The "External Speech" driver from BRLTTY is used.
+
+- Copy brl_es_wrapper.sample to brl_es_wrapper.
+
+- Edit brl_es_wrapper to make the paths point to the right place.
+
+- In /etc/brltty.conf put the following lines:
+
+speech-driver es
+speech-parameters program=/home/foo/cicero/brl_es_wrapper,uid=500,gid=500
+
+  with the correct path where you've untar'ed this, and with
+  your user's correct uid and gid.
+
+- Restart BRLTTY.
+
+- If it doesn't speak, go look into the log file that you
+  specified in brl_es_wrapper.
+
+Available utility scripts in this package:
+
+- tts_shell.py: "Interactively" speaks text received on stdin, echoes it
+  back to stdout but only as it is spoken. Empty line means shut-up.
+  Use ctrl-D to quit.
+
+- bulktalk.py: takes text from stdin (can be piped) or cmdline and
+  either speaks it directly through MBROLA or saves the audio to a file.
+  Matched rules can optionally be displayed for rule debugging.
+
+- wphons.py: Translates phrase given on cmd line or stdin into phonemes.
+  Shows each rule as it is applied. Helps track pronunciation rule
+  glitches.
+
+- saypho.py: Takes a sequence of phonemes on cmd line and speaks them
+  to test out pronunciations. Calls mbrola and plays the result
+  with sox.
+
+- regress.py: checklist.en contains a list of phrases and known
+  good phonetic pronunciation pairs. Ttranslates each phrase
+  to phonemes using the current rules file and checks that the result is
+  identical to the known good pronunciation. For regression testing
+  when editing the rules.
+
+- testfilters.py: Takes text from cmd line or stdin and passes it through
+  the filters stage only, and prints the result.
+
+Feedback Appreciated:
+
+If you have any improvements to contribute, bugs to declare, or simply any 
+comments (positive or negative) about this program, please don't hesitate 
+to send us an email to the following addresses:
+
+	Nicolas Pitre <nico@cam.org>
+	Stéphane Doyon <s.doyon@videotron.ca>
+
