@@ -1,7 +1,7 @@
 Cicero TTS: A Small, Fast and Free Text-To-Speech Engine.
 
-Copyright 2003-2008 Nicolas Pitre <nico@cam.org>
-Copyright 2003-2008 Stéphane Doyon <s.doyon@videotron.ca>
+Copyright 2003-2008 Nicolas Pitre <nico@fluxnic.net>
+Copyright 2003-2008 Stéphane Doyon <steph@electron9.net>
 
 Version 0.7.2, June 2008
 
@@ -121,6 +121,6 @@ If you have any improvements to contribute, bugs to declare, or simply any
 comments (positive or negative) about this program, please don't hesitate 
 to send us an email to the following addresses:
 
-	Nicolas Pitre <nico@cam.org>
-	Stéphane Doyon <s.doyon@videotron.ca>
+	Nicolas Pitre <nico@fluxnic.net>
+	Stéphane Doyon <steph@electron9.net>
 
